@@ -83,7 +83,7 @@ function filterTodo(e) {
     });
 }
 
-function saveLocalTodos(todo) {
+function checkTodos() {
     //Check if there is already something
     let todos;
     if (localStorage.getItem('todos') === null) {
@@ -91,18 +91,17 @@ function saveLocalTodos(todo) {
     } else {
         todos = JSON.parse(localStorage.getItem('todos'));
     }
+    return todos;
+}
+
+function saveLocalTodos(todo) {
+    let todos = checkTodos();
     todos.push(todo);
     localStorage.setItem('todos', JSON.stringify(todos));
 }
 
 function getTodos() {
-    //Check if there is already something
-    let todos;
-    if (localStorage.getItem('todos') === null) {
-        todos = [];
-    } else {
-        todos = JSON.parse(localStorage.getItem('todos'));
-    }
+    let todos = checkTodos();
     todos.forEach(function(todo) {
         //Todo DIV
         const todoDiv = document.createElement('div');
